@@ -77,13 +77,16 @@ def preprocess_all_time_series(trajectories, decimals: int = 3):
         
         all_sequences.append(formatted_sequence)
     
-    # Split into train and validation sets
-    train_texts, temp_texts = train_test_split(
-        all_sequences, test_size=0.4, random_state=42
-    )
 
-    val_texts, test_texts = train_test_split(
-        temp_texts, test_size=0.5, random_state=42
+    # First 6 systems as test data
+    test_texts = all_sequences[:6]
+    
+    # Remaining systems for training and validation
+    remaining_sequences = all_sequences[6:]
+    
+    # Split remaining sequences into training and validation sets
+    train_texts, val_texts = train_test_split(
+        remaining_sequences, test_size=0.2, random_state=42
     )
     
     return train_texts, val_texts, test_texts
