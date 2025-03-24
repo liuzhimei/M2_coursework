@@ -21,10 +21,6 @@ def preprocess_time_series(data, decimals: int = 3) -> str:
     """
     data = np.array(data, dtype=np.float32)  # Ensures numerical stability
 
-    # # Compute alpha as the 99th percentile divided by 10
-    # p99 = np.percentile(data, 99)  # Find the 99th percentile
-    # alpha = p99 / 10 if p99 > 0 else 1  # Ensure alpha is never zero
-
     alpha = 0.5
 
     # Scale and round
@@ -63,10 +59,6 @@ def preprocess_all_time_series(trajectories, decimals: int = 3):
         
         # Ensure numerical stability
         data = np.array(data, dtype=np.float32)
-        
-        # # Compute alpha using the 99th percentile divided by 10
-        # p99 = np.percentile(data, 99)
-        # alpha = p99 / 10 if p99 > 0 else 1
 
         alpha = 0.5
         
@@ -82,11 +74,11 @@ def preprocess_all_time_series(trajectories, decimals: int = 3):
         all_sequences.append(formatted_sequence)
     
 
-    # First 6 systems as test data
-    test_texts = all_sequences[:6]
+    # First 100 systems as test data
+    test_texts = all_sequences[:100]
     
     # Remaining systems for training and validation
-    remaining_sequences = all_sequences[6:]
+    remaining_sequences = all_sequences[100:]
     
     # Split remaining sequences into training and validation sets
     train_texts, val_texts = train_test_split(
