@@ -21,9 +21,11 @@ def preprocess_time_series(data, decimals: int = 3) -> str:
     """
     data = np.array(data, dtype=np.float32)  # Ensures numerical stability
 
-    # Compute alpha as the 99th percentile divided by 10
-    p99 = np.percentile(data, 99)  # Find the 99th percentile
-    alpha = p99 / 10 if p99 > 0 else 1  # Ensure alpha is never zero
+    # # Compute alpha as the 99th percentile divided by 10
+    # p99 = np.percentile(data, 99)  # Find the 99th percentile
+    # alpha = p99 / 10 if p99 > 0 else 1  # Ensure alpha is never zero
+
+    alpha = 0.5
 
     # Scale and round
     scaled_data = np.round(data / alpha, decimals)
@@ -62,9 +64,11 @@ def preprocess_all_time_series(trajectories, decimals: int = 3):
         # Ensure numerical stability
         data = np.array(data, dtype=np.float32)
         
-        # Compute alpha using the 99th percentile divided by 10
-        p99 = np.percentile(data, 99)
-        alpha = p99 / 10 if p99 > 0 else 1
+        # # Compute alpha using the 99th percentile divided by 10
+        # p99 = np.percentile(data, 99)
+        # alpha = p99 / 10 if p99 > 0 else 1
+
+        alpha = 0.5
         
         # Scale and round
         scaled_data = np.round(data / alpha, decimals)
@@ -126,6 +130,7 @@ if __name__ == "__main__":
     preprocessed_sequence = preprocess_time_series(data)
     print("\nPreprocessed Sequence from system_id=0:")
     print(preprocessed_sequence)
+
     
     # Tokenize the sequence
     tokenized_sequence = tokenize_sequence(preprocessed_sequence)
