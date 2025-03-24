@@ -37,7 +37,7 @@ def preprocess_time_series(data, decimals: int = 3) -> str:
     return formatted_sequence
 
 
-def preprocess_all_time_series(trajectories, decimals: int = 3, test_size=0.2):
+def preprocess_all_time_series(trajectories, decimals: int = 3):
     """
     Preprocesses all time-series data using the LLMTIME scheme.
 
@@ -78,11 +78,15 @@ def preprocess_all_time_series(trajectories, decimals: int = 3, test_size=0.2):
         all_sequences.append(formatted_sequence)
     
     # Split into train and validation sets
-    train_texts, val_texts = train_test_split(
-        all_sequences, test_size=test_size, random_state=42
+    train_texts, temp_texts = train_test_split(
+        all_sequences, test_size=0.4, random_state=42
+    )
+
+    val_texts, test_texts = train_test_split(
+        temp_texts, test_size=0.5, random_state=42
     )
     
-    return train_texts, val_texts
+    return train_texts, val_texts, test_texts
 
 
 
@@ -125,9 +129,10 @@ if __name__ == "__main__":
     print("\nTokenized Sequence from system_id=0:")
     print(tokenized_sequence)
 
-    train_texts, val_texts = preprocess_all_time_series(trajectories)
+    train_texts, val_texts, test_texts = preprocess_all_time_series(trajectories)
     print("\nExample train sequence:")
     print(train_texts[0])
     print("\nExample validation sequence:")
     print(val_texts[0])
-    print(f"\nShape of train_texts: {np.shape(train_texts)}, shape of val_texts: {np.shape(val_texts)}")
+    print(f"\nShape of train_texts: {np.shape(train_texts)}, shape of val_texts: {np.shape(val_texts)}, shape of test_texts: {np.shape(test_texts)}")
+    
