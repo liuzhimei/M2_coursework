@@ -27,6 +27,7 @@ M2_coursework/
 ├── image/
 │
 ├── README.md
+├── pyproject.toml
 ├── baseline.ipynb
 ├── lora.ipynb
 ├── flops.ipynb
