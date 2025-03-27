@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "M2_coursework"
+version = "0.1.0"
+description = "Forecasting predator-prey systems using LoRA with Qwen"
+authors = [
+    {name = "Zhimei Liu", email = "zl474@cam.ac.uk"}
+]
+license = {file = "LICENSE"}
+dependencies = [
+    "torch>=2.0.0",
+    "transformers>=4.35",
+    "numpy",
+    "matplotlib",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "flake8",
+    "pre-commit"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/liuzhimei/M2_coursework"
+"Repository" = "https://github.com/liuzhimei/M2_coursework"
+
+
