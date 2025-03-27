@@ -1,5 +1,5 @@
 # M2 Coursework
-
+This is my coursework for the MPhil Data Intensive Science M2 course. 
 
 ## Directory Structure
 ```
